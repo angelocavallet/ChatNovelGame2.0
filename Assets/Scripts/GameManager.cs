@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject notificationBar;
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
-    private float messageDelay = 0.1f; // Tempo de atraso entre as mensagens
+    private float messageDelay = 1.2f; // Tempo de atraso entre as mensagens
 
     public Button botao1;
     public Button botao2;
@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
 
         fadeImage.color = transparentBlack;
         StartConversation();
+        novoDia = "Qua 22:40";
+        dia.text = novoDia;
     }
 
     void Update()
@@ -80,30 +82,7 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.Log("Inicio");
                     elapsedTextTime += Time.deltaTime;
-                    if(novoDia == "Sex 13:30")
-                    {
-                        dia.text = "Sex 13:30";
-                    } 
-                    else if(novoDia == "Sexta mais tarde")
-                    {
-                        dia.text = "Sex 23:00";
-                    } 
-                    else if(novoDia == "Dom 12:40")
-                    {
-                        dia.text = "Dom 12:40";
-                    }
-                    else if(novoDia == "Domingo mais tarde")
-                    {
-                        dia.text = "Dom 22:15";
-                    }
-                    else if(novoDia == "Seg 19:36")
-                    {
-                        dia.text = "Seg 19:36";
-                    }
-                    else if(novoDia == "Ter 20:07")
-                    {
-                        dia.text = "Ter 20:07";
-                    }
+                    dia.text = novoDia;                  
                 }
 
                 else if (reverse == false)
@@ -492,6 +471,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("É sofrido, mas pelo menos to na minha área");
         yield return createNewMessageFromYou("Mas você ta gostando?");
 
+        setButtonOptionsAndShow(
+         "Simmm, to aprendendo bastante", () => StartCoroutine(chat23()),
+         "Mais ou menos, estagiário é muito desvalorizado", () => StartCoroutine(chat24()),
+         " ", () => StartCoroutine(chat24())
+         );
     }
 
     public IEnumerator chat21()
@@ -742,11 +726,12 @@ public class GameManager : MonoBehaviour
 
         yield return createNewMessageFromMe("Nos vemos na sexta");
 
-        novoDia = "Sex 13:30";
-        animationEnabled = true;
-        textoFadeImage.text = "Muito bom rever uma amiga de infancia";
+        textoFadeImage.text = "Muito bom rever uma amiga de infância";
         diaFadeImage.text = "Sex 13:30";
         posTransicao = "chat36";
+        novoDia = "Qua 22:40";
+        dia.text = novoDia;
+        animationEnabled = true;
     }
 
     public IEnumerator chat34()
@@ -756,11 +741,12 @@ public class GameManager : MonoBehaviour
 
         yield return createNewMessageFromMe("Até sexta");
 
-        novoDia = "Sex 13:30";
-        animationEnabled = true;
-        textoFadeImage.text = "Muito bom rever uma amiga de infancia";
+        textoFadeImage.text = "Muito bom rever uma amiga de infância";
         diaFadeImage.text = "Sex 13:30";
         posTransicao = "chat36";
+        novoDia = "Qua 22:40";
+        dia.text = novoDia;
+        animationEnabled = true;
     }
 
     public IEnumerator chat35()
@@ -770,11 +756,12 @@ public class GameManager : MonoBehaviour
 
         yield return createNewMessageFromMe("Boa noite!!");
 
-        novoDia = "Sex 13:30";
-        animationEnabled = true;
-        textoFadeImage.text = "Muito bom rever uma amiga de infancia";
+        textoFadeImage.text = "Muito bom rever uma amiga de infância";
         diaFadeImage.text = "Sex 13:30";
         posTransicao = "chat36";
+        novoDia = "Qua 22:40";
+        dia.text = novoDia;
+        animationEnabled = true;
     }
 
     public IEnumerator chat36()
@@ -897,12 +884,12 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Até depois");
         yield return createNewMessageFromMe("(Figurinha)");
 
-        Debug.Log("Mudou de tempo");
-        novoDia = "Sexta mais tarde";
-        animationEnabled = true;
         textoFadeImage.text = "(SORVETE)";
-        diaFadeImage.text = "Mais tarde naquele dia";
+        diaFadeImage.text = "Sex 23:00";
         posTransicao = "chat465";
+        novoDia = "Sex 23:00";
+        dia.text = novoDia;     
+        animationEnabled = true;
     }
 
     public IEnumerator chat44()
@@ -917,11 +904,12 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Até depois");
         yield return createNewMessageFromMe("(Figurinha)");
 
-        novoDia = "Sexta mais tarde";
-        animationEnabled = true;
         textoFadeImage.text = "(SORVETE)";
-        diaFadeImage.text = "Mais tarde naquele dia";
+        diaFadeImage.text = "Sex 23:00";
         posTransicao = "chat465";
+        novoDia = "Sex 23:00";
+        dia.text = novoDia;
+        animationEnabled = true;
     }
 
     public IEnumerator chat45()
@@ -936,11 +924,12 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Até depois");
         yield return createNewMessageFromMe("(Figurinha)");;
 
-        novoDia = "Sexta mais tarde";;
-        animationEnabled = true;
         textoFadeImage.text = "(SORVETE)";
-        diaFadeImage.text = "Mais tarde naquele dia";
+        diaFadeImage.text = "Sex 23:00";
         posTransicao = "chat465";
+        novoDia = "Sex 23:00";
+        dia.text = novoDia;
+        animationEnabled = true;
     }
 
     public IEnumerator chat465()
@@ -1434,6 +1423,11 @@ public class GameManager : MonoBehaviour
 
         yield return createNewMessageFromMe("Mariaa");
 
+        setButtonOptionsAndShow(
+     "Ta tudo certo?", () => StartCoroutine(chat71()),
+     "Ta viva? kkkj", () => StartCoroutine(chat72()),
+     "Alooou", () => StartCoroutine(chat73())
+     );
     }
     
     public IEnumerator chat71()
@@ -1519,11 +1513,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("E vc?");
         yield return createNewMessageFromYou("To bem também");
 
-        setButtonOptionsAndShow(
-     "Tranquilo", () => StartCoroutine(chat75()),
-     "Aconteceu alguma coisa?", () => StartCoroutine(chat79()),
-     "Ah, fiquei meio preocupado", () => StartCoroutine(chat80())
-     );
+        novoDia = "Qui 19:50";
+        animationEnabled = true;
+        textoFadeImage.text = "Será que ele ta com ciúmes?                      Será que aconteceu alguma coisa?";
+        diaFadeImage.text = "Qui 19:50";
+        posTransicao = "chat87";
     }
 
     public IEnumerator chat77() //Aqui vai pular pro próximo dia
@@ -1535,11 +1529,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("E vc?");
         yield return createNewMessageFromYou("To bem também");
 
-        setButtonOptionsAndShow(
-     "Tranquilo", () => StartCoroutine(chat75()),
-     "Aconteceu alguma coisa?", () => StartCoroutine(chat79()),
-     "Ah, fiquei meio preocupado", () => StartCoroutine(chat80())
-     );
+        novoDia = "Qui 19:50";
+        animationEnabled = true;
+        textoFadeImage.text = "Será que ele ta com ciúmes?                      Será que aconteceu alguma coisa?";
+        diaFadeImage.text = "Qui 19:50";
+        posTransicao = "chat87";
     }
     
     public IEnumerator chat78()
@@ -1600,7 +1594,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("Só tava ocupada");
         yield return createNewMessageFromYou("O José tava aqui");
 
-        
+        setButtonOptionsAndShow(
+     "Se aconteceu algo pode me contar", () => StartCoroutine(chat85()),
+     "Ele fez alguma coisa?", () => StartCoroutine(chat86()),
+     "Entendi", () => StartCoroutine(chat84())
+     );
     }
     
     public IEnumerator chat82()
@@ -1613,6 +1611,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("Só tava ocupada");
         yield return createNewMessageFromYou("O José tava aqui");
 
+        setButtonOptionsAndShow(
+     "Se aconteceu algo pode me contar", () => StartCoroutine(chat85()),
+     "Ele fez alguma coisa?", () => StartCoroutine(chat86()),
+     "Entendi", () => StartCoroutine(chat84())
+     );
     }
     
     public IEnumerator chat83()
@@ -1625,7 +1628,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("Só tava ocupada");
         yield return createNewMessageFromYou("O José tava aqui");
 
-        
+        setButtonOptionsAndShow(
+     "Se aconteceu algo pode me contar", () => StartCoroutine(chat85()),
+     "Ele fez alguma coisa?", () => StartCoroutine(chat86()),
+     "Entendi", () => StartCoroutine(chat84())
+     );
     }
 
     public IEnumerator chat84() //Aqui muda de dia
@@ -1635,6 +1642,11 @@ public class GameManager : MonoBehaviour
 
         yield return createNewMessageFromMe("Entendi");
 
+        novoDia = "Qui 19:50";
+        animationEnabled = true;
+        textoFadeImage.text = "Será que ele ta com ciúmes?                      Será que aconteceu alguma coisa?";
+        diaFadeImage.text = "Qui 19:50";
+        posTransicao = "chat87";
     }
 
     public IEnumerator chat85() //Aqui muda de dia
@@ -1647,6 +1659,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("Mas ta td bem, sério");
         yield return createNewMessageFromMe("Ta né");
 
+        novoDia = "Qui 19:50";
+        animationEnabled = true;
+        textoFadeImage.text = "Será que ele ta com ciúmes?                      Será que aconteceu alguma coisa?";
+        diaFadeImage.text = "Qui 19:50";
+        posTransicao = "chat87";
     }
     
     public IEnumerator chat86()// Aqui muda de dia
@@ -1661,8 +1678,390 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("desculpa");
         yield return createNewMessageFromYou("Ta ok");
 
+        novoDia = "Qui 19:50";
+        animationEnabled = true;
+        textoFadeImage.text = "Será que ele ta com ciúmes?                      Será que aconteceu alguma coisa?";
+        diaFadeImage.text = "Qui 19:50";
+        posTransicao = "chat87";
     }
 
+    public IEnumerator chat87()
+    {
+        Debug.Log("Cha87");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Oi");
+   
+        setButtonOptionsAndShow(
+     "Como estão as coisas?", () => StartCoroutine(chat88()),
+     "Eai de boa?", () => StartCoroutine(chat89()),
+     "Tudo certo", () => StartCoroutine(chat90())
+     );
+    }
+
+    public IEnumerator chat88()
+    {
+        Debug.Log("Cha88");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Como estão as coisas?");
+        yield return createNewMessageFromYou("Oi");
+        yield return createNewMessageFromYou("Tranquilo");
+        yield return createNewMessageFromMe("Semana que vem to indo embora ja");
+        yield return createNewMessageFromMe("CTa afim de sair de novo antes de eu ir?");
+        yield return createNewMessageFromMe("Amanhã talvez?");
+        yield return createNewMessageFromYou("Cara, amanhã eu não consigo");
+        yield return createNewMessageFromYou("Foi mal");
+
+        setButtonOptionsAndShow(
+     "Ok", () => StartCoroutine(chat91()),
+     "E sábado?", () => StartCoroutine(chat92()),
+     "Tudo bem, podemos ver outro dia então", () => StartCoroutine(chat93())
+     );
+    }
+
+    public IEnumerator chat89()
+    {
+        Debug.Log("Cha89");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Eai de boas?");
+        yield return createNewMessageFromYou("Oi");
+        yield return createNewMessageFromYou("Tranquilo");
+        yield return createNewMessageFromMe("Semana que vem to indo embora ja");
+        yield return createNewMessageFromMe("CTa afim de sair de novo antes de eu ir?");
+        yield return createNewMessageFromMe("Amanhã talvez?");
+        yield return createNewMessageFromYou("Cara, amanhã eu não consigo");
+        yield return createNewMessageFromYou("Foi mal");
+
+        setButtonOptionsAndShow(
+     "Ok", () => StartCoroutine(chat91()),
+     "E sábado?", () => StartCoroutine(chat92()),
+     "Tudo bem, podemos ver outro dia então", () => StartCoroutine(chat93())
+     );
+    }
+
+    public IEnumerator chat90()
+    {
+        Debug.Log("Cha90");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Tudo certo?");
+        yield return createNewMessageFromYou("Oi");
+        yield return createNewMessageFromYou("Tudo sim");
+        yield return createNewMessageFromMe("Semana que vem to indo embora ja");
+        yield return createNewMessageFromMe("CTa afim de sair de novo antes de eu ir?");
+        yield return createNewMessageFromMe("Amanhã talvez?");
+        yield return createNewMessageFromYou("Cara, amanhã eu não consigo");
+        yield return createNewMessageFromYou("Foi mal");
+
+        setButtonOptionsAndShow(
+     "Ok", () => StartCoroutine(chat91()),
+     "E sábado?", () => StartCoroutine(chat92()),
+     "Tudo bem, podemos ver outro dia então", () => StartCoroutine(chat93())
+     );
+    }
+
+    public IEnumerator chat91()//Dia acabou
+    {
+        Debug.Log("Cha91");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Ok");
+
+
+    }
+
+    public IEnumerator chat92()
+    {
+        Debug.Log("Cha92");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("E sábado?");
+        yield return createNewMessageFromYou("Também não");
+        yield return createNewMessageFromYou("Esse fim de semana não da");
+
+        setButtonOptionsAndShow(
+     "Tudo bem", () => StartCoroutine(chat94()),
+     "Pq?", () => StartCoroutine(chat95()),
+     "Tem alguma coisa a ver com o José?", () => StartCoroutine(chat96())
+     );
+    }
+
+public IEnumerator chat93()
+    {
+        Debug.Log("Cha93");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Tudo bem, podemos ver outro dia então");
+        yield return createNewMessageFromYou("Sim vamos vendo");
+        yield return createNewMessageFromYou("Mas não sei se vou poder");
+
+        setButtonOptionsAndShow(
+     "Tudo bem", () => StartCoroutine(chat94()),
+     "Pq?", () => StartCoroutine(chat95()),
+     "Tem alguma coisa a ver com o José?", () => StartCoroutine(chat96())
+     );
+    }
+
+    public IEnumerator chat94()//dia acaba
+    {
+        Debug.Log("Cha94");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Tudo bem");
+
+
+    }
+
+    public IEnumerator chat95()
+    {
+        Debug.Log("Cha95");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Pq?");
+        yield return createNewMessageFromYou("Tô ocupada com uns trabalhos da facul");
+        yield return createNewMessageFromYou("Desculpa mesmo");
+        yield return createNewMessageFromYou("Queria muito poder ir");
+        yield return createNewMessageFromMe("Você ta diferente");
+        yield return createNewMessageFromYou("To?");
+
+        setButtonOptionsAndShow(
+     "Do nada tu ficou seca", () => StartCoroutine(chat97()),
+     "Sei lá vc ta estranha", () => StartCoroutine(chat98()),
+     "Tenho certeza que é seu namorado", () => StartCoroutine(chat99())
+     );
+    }
+
+    public IEnumerator chat96()
+    {
+        Debug.Log("Cha96");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Tem lguma coisa a ver com o josé?",true);
+        yield return createNewMessageFromMe("Pq?");
+        yield return createNewMessageFromYou("Tô ocupada com uns trabalhos da facul");
+        yield return createNewMessageFromYou("Desculpa mesmo");
+        yield return createNewMessageFromYou("Queria muito poder ir");
+        yield return createNewMessageFromMe("Você ta diferente");
+        yield return createNewMessageFromYou("To?");
+
+        setButtonOptionsAndShow(
+     "Do nada tu ficou seca", () => StartCoroutine(chat97()),
+     "Sei lá vc ta estranha", () => StartCoroutine(chat98()),
+     "Tenho certeza que é seu namorado", () => StartCoroutine(chat99())
+     );
+    }
+    
+    public IEnumerator chat97()
+    {
+        Debug.Log("Cha97");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Do nada tu ficou seca");
+        yield return createNewMessageFromYou("Olha");
+        yield return createNewMessageFromYou("Não sei oq vc ta pensando");
+        yield return createNewMessageFromYou("Mas eu só to cansada");
+
+        setButtonOptionsAndShow(
+     "Se tu diz...", () => StartCoroutine(chat100()),
+     "Olha, eu sei que tem algo errado", () => StartCoroutine(chat101()),
+     "Eu quero muito te ajudar", () => StartCoroutine(chat102())
+     );
+    }
+
+    public IEnumerator chat98()
+    {
+        Debug.Log("Cha98");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Sei la vc ta estranha");
+        yield return createNewMessageFromYou("Olha");
+        yield return createNewMessageFromYou("Não sei oq vc ta pensando");
+        yield return createNewMessageFromYou("Mas eu só to cansada");
+
+        setButtonOptionsAndShow(
+     "Se tu diz...", () => StartCoroutine(chat100()),
+     "Olha, eu sei que tem algo errado", () => StartCoroutine(chat101()),
+     "Eu quero muito te ajudar", () => StartCoroutine(chat102())
+     );
+    }
+
+    public IEnumerator chat99()
+    {
+        Debug.Log("Cha99");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Tenho certeza que teu namorado ta te controlando",true);
+        yield return createNewMessageFromMe("Sei la vc ta estranha");
+        yield return createNewMessageFromYou("Olha");
+        yield return createNewMessageFromYou("Não sei oq vc ta pensando");
+        yield return createNewMessageFromYou("Mas eu só to cansada");
+
+        setButtonOptionsAndShow(
+     "Se tu diz...", () => StartCoroutine(chat100()),
+     "Olha, eu sei que tem algo errado", () => StartCoroutine(chat101()),
+     "Eu quero muito te ajudar", () => StartCoroutine(chat102())
+     );
+    }
+
+    public IEnumerator chat100()
+    {
+        Debug.Log("Cha100");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Se tu diz...");
+        yield return createNewMessageFromMe("Mas eu não acredito");
+        yield return createNewMessageFromYou("Mesmo se tiver algo errado vc não tem pq se meter");
+        yield return createNewMessageFromYou("Não quero causar confusão com isso");
+
+        setButtonOptionsAndShow(
+     "Me deixa falar com o José", () => StartCoroutine(chat103()),
+     "Eu não to me metendo por me meter", () => StartCoroutine(chat104()),
+     "Isso é ridículo", () => StartCoroutine(chat105())
+     );
+    }
+
+    public IEnumerator chat101()
+    {
+        Debug.Log("Cha101");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Olha, eu sei que tem algo errado");
+        yield return createNewMessageFromYou("E se tiver??");
+        yield return createNewMessageFromYou("Vc não tem pq se meter");
+        yield return createNewMessageFromYou("Não quero causar confusão com isso");
+
+        setButtonOptionsAndShow(
+     "Me deixa falar com o José", () => StartCoroutine(chat103()),
+     "Eu não to me metendo por me meter", () => StartCoroutine(chat104()),
+     "Isso é ridículo", () => StartCoroutine(chat105())
+     );
+    }
+
+     public IEnumerator chat102()
+    {
+        Debug.Log("Cha102");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Olha eu quero muito poder te ajudar",true);
+        yield return createNewMessageFromMe("Olha, eu sei que tem algo errado");
+        yield return createNewMessageFromYou("E se tiver??");
+        yield return createNewMessageFromYou("Vc não tem pq se meter");
+        yield return createNewMessageFromYou("Não quero causar confusão com isso");
+
+        setButtonOptionsAndShow(
+     "Me deixa falar com o José", () => StartCoroutine(chat103()),
+     "Eu não to me metendo por me meter", () => StartCoroutine(chat104()),
+     "Isso é ridículo", () => StartCoroutine(chat105())
+     );
+    }
+    public IEnumerator chat103()//troca pra mãe
+    {
+        Debug.Log("Cha103");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Me deixa falar com o José",true);
+        yield return createNewMessageFromMe("Eu não to me metendo por me meter");
+        yield return createNewMessageFromMe("Mas claramente vc ta assim por causa dele");
+        yield return createNewMessageFromYou("É melhor pararmos de conversar");
+        yield return createNewMessageFromYou("Vai ser melhor assim");
+        yield return createNewMessageFromMe("Eu entendo");
+        yield return createNewMessageFromMe("Isso não ta certo");
+        yield return createNewMessageFromMe("Mas de qualquer forma se precisar de algo to aqui");
+        yield return createNewMessageFromMe("Se cuida");
+        yield return createNewMessageFromYou("Você também");
+
+        novoDia = "Ter 12:32";
+        animationEnabled = true;
+        textoFadeImage.text = "Tenho certreza que o josé ta privando ela";
+        diaFadeImage.text = "Duas semanas depois";
+        posTransicao = "chat106";
+    }
+
+    public IEnumerator chat104()//troca pra mãe
+    {
+        Debug.Log("Cha104");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Eu não to me metendo por me meter");
+        yield return createNewMessageFromMe("Eu não to me metendo por me meter");
+        yield return createNewMessageFromMe("Mas claramente vc ta assim por causa dele");
+        yield return createNewMessageFromYou("É melhor pararmos de conversar");
+        yield return createNewMessageFromYou("Vai ser melhor assim");
+        yield return createNewMessageFromMe("Eu entendo");
+        yield return createNewMessageFromMe("Isso não ta certo");
+        yield return createNewMessageFromMe("Mas de qualquer forma se precisar de algo to aqui");
+        yield return createNewMessageFromMe("Se cuida");
+        yield return createNewMessageFromYou("Você também");
+
+        novoDia = "Ter 12:32";
+        animationEnabled = true;
+        textoFadeImage.text = "Tenho certreza que o josé ta privando ela";
+        diaFadeImage.text = "Duas semanas depois";
+        posTransicao = "chat106";
+    }
+
+    public IEnumerator chat105()//troca pra mãe
+    {
+        Debug.Log("Cha105");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromMe("Isso é ridiculo",true);
+        yield return createNewMessageFromMe("Eu não to me metendo por me meter");
+        yield return createNewMessageFromMe("Mas claramente vc ta assim por causa dele");
+        yield return createNewMessageFromYou("É melhor pararmos de conversar");
+        yield return createNewMessageFromYou("Vai ser melhor assim");
+        yield return createNewMessageFromMe("Eu entendo");
+        yield return createNewMessageFromMe("Isso não ta certo");
+        yield return createNewMessageFromMe("Mas de qualquer forma se precisar de algo to aqui");
+        yield return createNewMessageFromMe("Se cuida");
+        yield return createNewMessageFromYou("Você também");
+
+        novoDia = "Ter 12:32";
+        animationEnabled = true;
+        textoFadeImage.text = "Tenho certreza que o josé ta privando ela";
+        diaFadeImage.text = "Duas semanas depois";
+        posTransicao = "chat106";
+    }
+
+    public IEnumerator chat106()//Ultima conversa
+    {
+        Debug.Log("Cha106");
+        ButtonPanel.SetActive(false);
+
+        yield return createNewMessageFromYou("Filho");
+        yield return createNewMessageFromMe("Oi mãe");
+        yield return createNewMessageFromYou("Preciso te mostrar essa notícia");
+        yield return createNewMessageFromYou("Link da notícia");
+        yield return createNewMessageFromYou("Não consigo acreditar nisso");
+        yield return createNewMessageFromMe("A MARIA????");
+        yield return createNewMessageFromYou("Sim filho");
+        yield return createNewMessageFromYou("O namorado dela....");
+        yield return createNewMessageFromYou("Sinto muito");
+        yield return createNewMessageFromMe("Não não não");
+        yield return createNewMessageFromMe("Não pode ser verdade");
+        yield return createNewMessageFromYou("Que tragédia");
+        yield return createNewMessageFromYou("Ela tava aqui com nós esses dias");
+        yield return createNewMessageFromYou("Você sabia de alguma coisa?");
+        yield return createNewMessageFromYou("Ela tava aqui com nós esses dias");
+        yield return createNewMessageFromYou("Você sabia de alguma coisa?");
+        yield return createNewMessageFromMe("Ela deu alguns indícios que ele era agresivo");
+        yield return createNewMessageFromMe("Mas eu não imaginei que chegaria nesse nível");
+        yield return createNewMessageFromMe("Mas eu não imaginei que chegaria nesse nível");
+        yield return createNewMessageFromMe("Achei que ela não queria ajuda");
+        yield return createNewMessageFromYou("Talvez ela estivesse com medo de pedir ajuda");
+        yield return createNewMessageFromMe("Eu sabia mãe...");
+        yield return createNewMessageFromMe("Mas fiquei com medo de me intrometer");
+        yield return createNewMessageFromMe("Eu devia ter feito alguma coisa");
+        yield return createNewMessageFromMe("Ela não merecia");
+        yield return createNewMessageFromMe("Preciso de um tempo para processar isso tudo");
+        yield return createNewMessageFromYou("Se precisar de apoio estou aqui filho");
+        yield return createNewMessageFromMe("Te amo, mãe");
+        yield return createNewMessageFromYou("Também te amo filho");
+
+
+    }
 
     //Cria as mensagens
     public IEnumerator createNewMessageFromMe(string mensagem, bool vaiSerDeletada=false)
@@ -1737,6 +2136,13 @@ public class GameManager : MonoBehaviour
         else if(posTransicao == "chat74")
         {
             StartCoroutine(chat74());
+        }
+        else if(posTransicao == "chat87")
+        {
+            StartCoroutine(chat87());
+        }
+        else{
+            StartCoroutine(chat106());
         }
 
 

@@ -1289,7 +1289,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: aaaaaaaaaaaaaaa
+  m_text: "Ser\xE1 que ele ta com ci\xFAmes?                      Ser\xE1 que aconteceu
+    alguma coisa? "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2948,7 +2949,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679286954154883653, guid: 22fce13ac9ba318439fa53aad94a2af1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1053.4719
+      value: -1053.4722
       objectReference: {fileID: 0}
     - target: {fileID: 7737304190529906059, guid: 22fce13ac9ba318439fa53aad94a2af1, type: 3}
       propertyPath: m_SizeDelta.x
