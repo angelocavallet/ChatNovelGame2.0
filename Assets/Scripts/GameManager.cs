@@ -12,7 +12,11 @@ public class GameManager : MonoBehaviour
     public GameObject notificationBar;
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
-    private float messageDelay = 1.2f; // Tempo de atraso entre as mensagens
+    public float messageDelay = 3.0f; // Tempo de atraso entre as mensagens
+
+    public Image cabecalho;
+    public Image botoesFundo;
+    public Image fotoMaria;
 
     public Button botao1;
     public Button botao2;
@@ -49,6 +53,18 @@ public class GameManager : MonoBehaviour
     public TMP_Text dia;
     private string novoDia;
 
+    public GameObject telasTransicao;
+    public Image notificacaoDia1;
+    public Image notificacaoDia2;
+    public Image notificacaoDia22;
+    public Image notificacaoDia3;
+    public Image notificacaoDia32;
+    public Image notificacaoDia4;
+    public Image notificacaoDia5;
+    public Image notificacaoDia6;
+    public Image notificacaoDia7;
+    public Button botaoTransicao;
+
     void Start()
     {
         //Quarta Feira 22:40
@@ -60,6 +76,20 @@ public class GameManager : MonoBehaviour
         StartConversation();
         novoDia = "Qua 22:40";
         dia.text = novoDia;
+
+        notificacaoDia1.gameObject.SetActive(false);
+        notificacaoDia2.gameObject.SetActive(false);
+        notificacaoDia22.gameObject.SetActive(false);
+        notificacaoDia3.gameObject.SetActive(false);
+        notificacaoDia32.gameObject.SetActive(false);
+        notificacaoDia4.gameObject.SetActive(false);
+        notificacaoDia5.gameObject.SetActive(false);
+        notificacaoDia6.gameObject.SetActive(false);
+        notificacaoDia7.gameObject.SetActive(false);
+        botaoTransicao.gameObject.SetActive(false);
+
+        SpriteRenderer cabecalhoSpriteRenderer = cabecalho.GetComponent<SpriteRenderer>();
+        SpriteRenderer botoesFundoSpriteRenderer = botoesFundo.GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -82,7 +112,8 @@ public class GameManager : MonoBehaviour
                 {
                     Debug.Log("Inicio");
                     elapsedTextTime += Time.deltaTime;
-                    dia.text = novoDia;                  
+                    dia.text = novoDia;    
+                    
                 }
 
                 else if (reverse == false)
@@ -95,14 +126,16 @@ public class GameManager : MonoBehaviour
                     elapsedTime = 0f;
                     elapsedTextTime = 0f;
                     reverse = true;
+                    telasDeNotificacao();
                 }
                 else
                 {
                     //acabou
-                    Debug.Log("Fim");
+                    Debug.Log("Fim da transição");
                     animationEnabled = false;
                     fadeImageObject.SetActive(false);
-                    iniciaProximoChat();
+                    botaoTransicao.gameObject.SetActive(true);
+                    ConfigureButtonTransition();                   
                 }
             }
         }
@@ -729,8 +762,7 @@ public class GameManager : MonoBehaviour
         textoFadeImage.text = "Muito bom rever uma amiga de infância";
         diaFadeImage.text = "Sex 13:30";
         posTransicao = "chat36";
-        novoDia = "Qua 22:40";
-        dia.text = novoDia;
+        novoDia = "Sext 13:30";
         animationEnabled = true;
     }
 
@@ -744,8 +776,7 @@ public class GameManager : MonoBehaviour
         textoFadeImage.text = "Muito bom rever uma amiga de infância";
         diaFadeImage.text = "Sex 13:30";
         posTransicao = "chat36";
-        novoDia = "Qua 22:40";
-        dia.text = novoDia;
+        novoDia = "Sex:13:30";
         animationEnabled = true;
     }
 
@@ -759,8 +790,7 @@ public class GameManager : MonoBehaviour
         textoFadeImage.text = "Muito bom rever uma amiga de infância";
         diaFadeImage.text = "Sex 13:30";
         posTransicao = "chat36";
-        novoDia = "Qua 22:40";
-        dia.text = novoDia;
+        novoDia = "Sex 13:30";
         animationEnabled = true;
     }
 
@@ -769,8 +799,11 @@ public class GameManager : MonoBehaviour
         //sexta feira 13:30
         Debug.Log("Chat36");
         ButtonPanel.SetActive(false);
+
+        messageDelay = 0.0001f;
         yield return createNewMessageFromYou("Oiee");
         yield return createNewMessageFromYou("As 3 então?");
+        messageDelay = 2.0f;
         yield return createNewMessageFromMe("Eaii");
         yield return createNewMessageFromMe("Sim ja to com roupa de ir");
 
@@ -887,8 +920,7 @@ public class GameManager : MonoBehaviour
         textoFadeImage.text = "(SORVETE)";
         diaFadeImage.text = "Sex 23:00";
         posTransicao = "chat465";
-        novoDia = "Sex 23:00";
-        dia.text = novoDia;     
+        novoDia = "Sex 23:00";  
         animationEnabled = true;
     }
 
@@ -908,7 +940,6 @@ public class GameManager : MonoBehaviour
         diaFadeImage.text = "Sex 23:00";
         posTransicao = "chat465";
         novoDia = "Sex 23:00";
-        dia.text = novoDia;
         animationEnabled = true;
     }
 
@@ -928,7 +959,6 @@ public class GameManager : MonoBehaviour
         diaFadeImage.text = "Sex 23:00";
         posTransicao = "chat465";
         novoDia = "Sex 23:00";
-        dia.text = novoDia;
         animationEnabled = true;
     }
 
@@ -1184,7 +1214,6 @@ public class GameManager : MonoBehaviour
 
      );
     }
-    //aaaaaaa
     public IEnumerator chat58()
     {
         Debug.Log("Chat58");
@@ -1247,11 +1276,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Vou ir também");
         yield return createNewMessageFromMe("Boa noite");
 
-        novoDia = "Dom 12:40";
-        animationEnabled = true;
         textoFadeImage.text = "Hoje foi um dia bom";
         diaFadeImage.text = "Dom 12:40";
         posTransicao = "chat64";
+        novoDia = "Dom 12:40";
+        animationEnabled = true;
     }
 
     public IEnumerator chat62()
@@ -1262,11 +1291,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Até");
         yield return createNewMessageFromMe("Boa noite");
 
-        novoDia = "Dom 12:40";
-        animationEnabled = true;
         textoFadeImage.text = "Hoje foi um dia bom";
         diaFadeImage.text = "Dom 12:40";
         posTransicao = "chat64";
+        novoDia = "Dom 12:40";
+        animationEnabled = true;
     }
 
     public IEnumerator chat63()
@@ -1277,11 +1306,11 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromMe("Se falemo");
         yield return createNewMessageFromMe("Boa noite");
 
-        novoDia = "Dom 12:40";
-        animationEnabled = true;
         textoFadeImage.text = "Hoje foi um dia bom";
         diaFadeImage.text = "Dom 12:40";
         posTransicao = "chat64";
+        novoDia = "Dom 12:40";
+        animationEnabled = true;
     }
 
     public IEnumerator chat64()
@@ -1309,18 +1338,20 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha65");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Ué pq não p"); //apaga
+        yield return createNewMessageFromMe("Ué pq não pode?",true); //apaga
         yield return createNewMessageFromMe("16:00 então?"); // reescreve com esse texto
         yield return createNewMessageFromYou("Acho que esse horário fica massa");
         yield return createNewMessageFromYou("Lá pelas 16:00 chego ai então");
         yield return createNewMessageFromYou("Fica esperto ein");
         yield return createNewMessageFromYou("(Figurinha)");
+        yield return createNewMessageFromMe("Feshoww");
+        yield return createNewMessageFromMe("(Figurinha)");
 
-        novoDia = "Domingo mais tarde";
-        animationEnabled = true;
         textoFadeImage.text = "(TERES)";
-        diaFadeImage.text = "Dom 22:15";
+        diaFadeImage.text = "Mais tarde naquele dia";
         posTransicao = "chat685";
+        novoDia = "Dom 22:15";
+        animationEnabled = true;
     }
 
     public IEnumerator chat66()
@@ -1328,18 +1359,20 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha66");
         ButtonPanel.SetActive(false);
 
-        yield return createNewMessageFromMe("Mais cedo que 17:00? kk"); //apaga
+        yield return createNewMessageFromMe("Mais cedo que 17:00? kk",true); //apaga
         yield return createNewMessageFromMe("16:00 então?"); // reescreve com esse texto
         yield return createNewMessageFromYou("Acho que esse horário fica massa");
         yield return createNewMessageFromYou("Lá pelas 16:00 chego ai então");
         yield return createNewMessageFromYou("Fica esperto ein");
         yield return createNewMessageFromYou("(Figurinha)");
-
-        novoDia = "Domingo mais tarde";
-        animationEnabled = true;
+        yield return createNewMessageFromMe("Feshoww");
+        yield return createNewMessageFromMe("(Figurinha)");
+        
         textoFadeImage.text = "(TERES)";
-        diaFadeImage.text = "Dom 22:15";
+        diaFadeImage.text = "Mais tarde naquele dia";
         posTransicao = "chat685";
+        novoDia = "Dom 22:15";
+        animationEnabled = true;
     }
 
     public IEnumerator chat67()
@@ -1353,12 +1386,14 @@ public class GameManager : MonoBehaviour
         yield return createNewMessageFromYou("Lá pelas 16:00 chego ai então", true);
         yield return createNewMessageFromYou("Fica esperto ein");
         yield return createNewMessageFromYou("(Figurinha)");
+        yield return createNewMessageFromMe("Feshoww");
+        yield return createNewMessageFromMe("(Figurinha)");
 
-        novoDia = "Domingo mais tarde";
-        animationEnabled = true;
         textoFadeImage.text = "(TERES)";
-        diaFadeImage.text = "Dom 22:15";
+        diaFadeImage.text = "Mais tarde naquele dia";
         posTransicao = "chat685";
+        novoDia = "Dom 22:15";
+        animationEnabled = true;
     }
 
     public IEnumerator chat685()
@@ -1369,7 +1404,11 @@ public class GameManager : MonoBehaviour
 
         yield return createNewMessageFromMe("Eai");
 
-
+        setButtonOptionsAndShow(
+     "Resenha demais nosso papo", () => StartCoroutine(chat68()),
+     "Meu aquele teres tava muito bom", () => StartCoroutine(chat69()),
+     "A mãe adorou conversar contigo ein", () => StartCoroutine(chat70())
+     );
     }
 
     public IEnumerator chat68()
@@ -1420,6 +1459,14 @@ public class GameManager : MonoBehaviour
         //Segunda 19:36
         Debug.Log("Cha71.5");
         ButtonPanel.SetActive(false);
+
+        // Define a cor desejada (164, 83, 171, 255) como um objeto Color
+            Color novaCor = new Color(164 / 255f, 83 / 255f, 171 / 255f, 1f);
+
+            // Altera a cor dos objetos desejados
+            botoesFundo.color = novaCor;
+            cabecalho.color = novaCor;
+            fotoMaria.color = novaCor;
 
         yield return createNewMessageFromMe("Mariaa");
 
@@ -2119,33 +2166,70 @@ public IEnumerator chat93()
         }
     }
 
-    public void iniciaProximoChat(){
-        if(posTransicao == "chat36"){
-            StartCoroutine(chat36());
-        }else if(posTransicao == "chat465")
-        {
-            StartCoroutine(chat465());
-        } else if(posTransicao == "chat64")
-        {
-            StartCoroutine(chat64());
-        }
-        else if(posTransicao == "chat715")
-        {
-            StartCoroutine(chat715());
-        }
-        else if(posTransicao == "chat74")
-        {
-            StartCoroutine(chat74());
-        }
-        else if(posTransicao == "chat87")
-        {
-            StartCoroutine(chat87());
-        }
-        else{
-            StartCoroutine(chat106());
-        }
-
-
-        posTransicao = null;
+    /*
+    public void iniciaProximoChat()
+    {
+    if (posTransicao == "chat36")
+    {
+        StartCoroutine(chat36());
     }
+    else if (posTransicao == "chat465")
+    {
+        StartCoroutine(chat465());
+    }
+    else if (posTransicao == "chat64")
+    {
+        StartCoroutine(chat64());
+    }
+    else if (posTransicao == "chat685")
+    {
+        StartCoroutine(chat685());
+    }
+    else if (posTransicao == "chat715")
+    {
+        StartCoroutine(chat715());        
+    }
+    else if (posTransicao == "chat74")
+    {
+        StartCoroutine(chat74());
+    }
+    else if (posTransicao == "chat87")
+    {
+        StartCoroutine(chat87());
+    }
+    else if (posTransicao == "chat106")
+    {
+        StartCoroutine(chat106());
+    }
+    else
+    {
+
+    }
+
+    posTransicao = null;
+    }
+    */
+    
+    public void telasDeNotificacao(){
+        if(posTransicao == "chat36"){
+            notificacaoDia1.gameObject.SetActive(true);
+        }
+    }
+
+    
+    public void OnBotaoTransicaoClick()
+    {      
+        if(posTransicao == "chat36")
+        {
+        botaoTransicao.gameObject.SetActive(false);
+        notificacaoDia1.gameObject.SetActive(false);
+        StartCoroutine(chat36());
+        }
+    }
+
+    public void ConfigureButtonTransition()
+{
+    botaoTransicao.onClick.AddListener(OnBotaoTransicaoClick);
+}
+    
 }
