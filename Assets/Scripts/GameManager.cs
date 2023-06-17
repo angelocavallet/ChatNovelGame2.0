@@ -40,15 +40,12 @@ public class GameManager : MonoBehaviour
 
     private float elapsedTime;
     private float elapsedTextTime;
-    public  GameObject fadeImageObject;
-    public  Image fadeImage;
+    public GameObject fadeImageObject;
+    public Image fadeImage;
     public TMP_Text textoFadeImage;
     public TMP_Text diaFadeImage;
     private bool reverse = false;
     private string posTransicao;
-
-    Color transparentBlack = new Color(0f, 0f, 0f, 0f);
-    Color solidBlack = new Color(0f, 0f, 0f, 1f);
 
     public TMP_Text dia;
     private string novoDia;
@@ -72,24 +69,13 @@ public class GameManager : MonoBehaviour
         textoBotao2 = botao2.GetComponentInChildren<TMP_Text>();
         textoBotao3 = botao3.GetComponentInChildren<TMP_Text>();
 
-        fadeImage.color = transparentBlack;
-        StartConversation();
         novoDia = "Qua 22:40";
         dia.text = novoDia;
 
-        notificacaoDia1.gameObject.SetActive(false);
-        notificacaoDia2.gameObject.SetActive(false);
-        notificacaoDia22.gameObject.SetActive(false);
-        notificacaoDia3.gameObject.SetActive(false);
-        notificacaoDia32.gameObject.SetActive(false);
-        notificacaoDia4.gameObject.SetActive(false);
-        notificacaoDia5.gameObject.SetActive(false);
-        notificacaoDia6.gameObject.SetActive(false);
-        notificacaoDia7.gameObject.SetActive(false);
-        botaoTransicao.gameObject.SetActive(false);
-
         SpriteRenderer cabecalhoSpriteRenderer = cabecalho.GetComponent<SpriteRenderer>();
         SpriteRenderer botoesFundoSpriteRenderer = botoesFundo.GetComponent<SpriteRenderer>();
+        
+        StartCoroutine(Chat1());
     }
 
     void Update()
@@ -125,27 +111,25 @@ public class GameManager : MonoBehaviour
                     minAlpha = temp;
                     elapsedTime = 0f;
                     elapsedTextTime = 0f;
-                    reverse = true;
-                    telasDeNotificacao();
+                    reverse = true;   
+                    telasDeNotificacao();    
                 }
                 else
                 {
                     //acabou
                     Debug.Log("Fim da transição");
                     animationEnabled = false;
+                    reverse = false;
+                    elapsedTime = 0f;
+                    elapsedTextTime = 0f;
+                    maxAlpha = 1f;
+                    minAlpha = 0f;
                     fadeImageObject.SetActive(false);
                     botaoTransicao.gameObject.SetActive(true);
-                    ConfigureButtonTransition();                   
+                    ConfigureButtonTransition();
                 }
             }
         }
-    }
-
-    public void StartConversation()
-    {
-        ButtonPanel.SetActive(false);
-     // StartCoroutine(FadeInScreen());
-        StartCoroutine(Chat1());
     }
 
     public IEnumerator Chat1()
@@ -2214,22 +2198,35 @@ public IEnumerator chat93()
         if(posTransicao == "chat36"){
             notificacaoDia1.gameObject.SetActive(true);
         }
+        
+        if(posTransicao == "chat465"){
+            notificacaoDia2.gameObject.SetActive(true);
+        }
     }
 
     
     public void OnBotaoTransicaoClick()
     {      
+        botaoTransicao.gameObject.SetActive(false);
+
         if(posTransicao == "chat36")
         {
-        botaoTransicao.gameObject.SetActive(false);
-        notificacaoDia1.gameObject.SetActive(false);
-        StartCoroutine(chat36());
+            notificacaoDia1.gameObject.SetActive(false);
+            StartCoroutine(chat36());
+        } 
+
+        if(posTransicao == "chat465")
+        {
+            notificacaoDia2.gameObject.SetActive(false);
+            StartCoroutine(chat465());
         }
+        
     }
 
     public void ConfigureButtonTransition()
-{
-    botaoTransicao.onClick.AddListener(OnBotaoTransicaoClick);
-}
+    {
+        botaoTransicao.onClick.RemoveAllListeners();
+        botaoTransicao.onClick.AddListener(OnBotaoTransicaoClick);
+    }
     
 }
