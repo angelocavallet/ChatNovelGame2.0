@@ -64,6 +64,10 @@ public class GameManager : MonoBehaviour
     public Button botaoTransicao2;
     public TMP_Text textoBotaoTransicao2;
 
+    public AudioSource musicAudioSource;
+    public Image SomOn;
+    public Image SomOff;
+
     void Start()
     {
         //Quarta Feira 22:40
@@ -2272,4 +2276,19 @@ public class GameManager : MonoBehaviour
         botaoTransicao2.onClick.AddListener(OnBotaoTransicao2Click);
     }
     
+    public void ToggleMusic()
+    {
+        if (musicAudioSource.isPlaying)
+        {
+            musicAudioSource.Pause();
+            SomOn.gameObject.SetActive(false);
+            SomOff.gameObject.SetActive(true);
+        }
+        else
+        {
+            musicAudioSource.Play();
+            SomOff.gameObject.SetActive(false);
+            SomOn.gameObject.SetActive(true);
+        }
+    }
 }

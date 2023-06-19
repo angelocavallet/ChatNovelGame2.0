@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 44b815b8fca434642aead590cf06f832
+guid: 959ba37b98e61134bb24ca33aa330631
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 943384188470618064
-    second: "Notifica\xE7\xE3o_Dia3_pt2_0"
+      213: 4840237254561571183
+    second: Mute_0
+  - first:
+      213: -679273813856026339
+    second: Mute_1
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -46,7 +49,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -134,13 +137,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "Notifica\xE7\xE3o_Dia3_pt2_0"
+      name: Mute_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1080
-        height: 1920
+        x: 60
+        y: 59
+        width: 187
+        height: 268
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,8 +151,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0d7e280dbe2971d00800000000000000
-      internalID: 943384188470618064
+      spriteID: f6121ca632afb2340800000000000000
+      internalID: 4840237254561571183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mute_1
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 151
+        width: 84
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d1103e3b01cb296f0800000000000000
+      internalID: -679273813856026339
       vertices: []
       indices: 
       edges: []
@@ -157,7 +181,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -165,7 +189,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      "Notifica\xE7\xE3o_Dia3_pt2_0": 943384188470618064
+      Mute_0: 4840237254561571183
+      Mute_1: -679273813856026339
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
