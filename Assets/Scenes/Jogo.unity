@@ -1006,7 +1006,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -146.31891}
+  m_AnchoredPosition: {x: 20, y: -146.08737}
   m_SizeDelta: {x: 743.8, y: 67.2}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &370914229
@@ -3449,7 +3449,8 @@ MonoBehaviour:
   notificationBar: {fileID: 0}
   rightMessagePrefab: {fileID: 4357653817745920119, guid: 0fc53b1bc8ae7194f833c0cdd1281eed, type: 3}
   leftMessagePrefab: {fileID: 6994099806256659394, guid: 414269132cac26845816113bc96ee493, type: 3}
-  messageDelay: 2
+  messageDelay: 0.00001
+  statusMaria: {fileID: 0}
   cabecalho: {fileID: 191248479}
   botoesFundo: {fileID: 1615265710}
   fotoMaria: {fileID: 0}
@@ -4024,7 +4025,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -225.4378}
+  m_AnchoredPosition: {x: 20, y: -224.97473}
   m_SizeDelta: {x: 743.8, y: 67.2}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1924312752
@@ -4521,7 +4522,7 @@ GameObject:
   - component: {fileID: 2040950557}
   - component: {fileID: 2040950556}
   m_Layer: 5
-  m_Name: OnlineMaria
+  m_Name: StatusMaria
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4788,7 +4789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679286954154883653, guid: 22fce13ac9ba318439fa53aad94a2af1, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -1053.4711
+      value: -1053.4722
       objectReference: {fileID: 0}
     - target: {fileID: 5632934118340301006, guid: 22fce13ac9ba318439fa53aad94a2af1, type: 3}
       propertyPath: m_ScrollSensitivity
