@@ -164,7 +164,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      maria80 recortada_0: -5055554880090515138
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

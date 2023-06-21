@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject notificationBar;
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
+	public GameObject noticiaPrefab;
     public float messageDelay = 3.0f; // Tempo de atraso entre as mensagens
 
     public TMP_Text statusMaria;
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
         SpriteRenderer cabecalhoSpriteRenderer = cabecalho.GetComponent<SpriteRenderer>();
         SpriteRenderer botoesFundoSpriteRenderer = botoesFundo.GetComponent<SpriteRenderer>();
         
-        StartCoroutine(Chat1());
+        StartCoroutine(chat106());
     }
 
     void Update()
@@ -1810,7 +1811,7 @@ public class GameManager : MonoBehaviour
         messageDelay = 2.0f;
         yield return createNewMessageFromMe("Oi mãe");
         yield return createNewMessageFromYou("Preciso te mostrar essa notícia");
-        yield return createNewMessageFromYou("Link da notícia");
+        yield return createNewNoticiaFromYou();
         yield return createNewMessageFromYou("Não consigo acreditar nisso");
         yield return createNewMessageFromMe("A MARIA????");
         yield return createNewMessageFromYou("Sim filho");
@@ -1852,6 +1853,16 @@ public class GameManager : MonoBehaviour
     public IEnumerator createNewMessageFromYou(string mensagem, bool vaiSerDeletada=false)
     {
         yield return waitSecondsAndCreateDialogChat(leftMessagePrefab, mensagem, vaiSerDeletada);
+
+    }
+
+	public IEnumerator createNewNoticiaFromYou()
+    {
+        yield return new WaitForSeconds(messageDelay);
+
+        GameObject newMessage = Instantiate(noticiaPrefab, contentConversation.transform);
+
+        newMessage.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 
     public IEnumerator waitSecondsAndCreateDialogChat(GameObject prefab, string mensagem, bool vaiSerDeletada=false)
@@ -1933,6 +1944,7 @@ public class GameManager : MonoBehaviour
             StartCoroutine(chat74());
         }else if(posTransicao == "chat106"){
             notificacaoDia7.gameObject.SetActive(false);
+            DestroiChatMessagesAll();
             StartCoroutine(chat106());
         }
         
@@ -1990,6 +2002,14 @@ public class GameManager : MonoBehaviour
             musicAudioSource.Play();
             SomOff.gameObject.SetActive(false);
             SomOn.gameObject.SetActive(true);
+        }
+    }
+
+    public void DestroiChatMessagesAll()
+    {
+        foreach(Transform child in contentConversation.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }
