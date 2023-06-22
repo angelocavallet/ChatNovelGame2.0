@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject contentConversation;
-    public GameObject notificationBar;
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
 	public GameObject noticiaPrefab;
@@ -72,95 +71,23 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //Quarta Feira 22:40
         textoBotao1 = botao1.GetComponentInChildren<TMP_Text>();
         textoBotao2 = botao2.GetComponentInChildren<TMP_Text>();
         textoBotao3 = botao3.GetComponentInChildren<TMP_Text>();
 
-        novoDia = "Qua 22:40";
-        dia.text = novoDia;
-
         SpriteRenderer cabecalhoSpriteRenderer = cabecalho.GetComponent<SpriteRenderer>();
         SpriteRenderer botoesFundoSpriteRenderer = botoesFundo.GetComponent<SpriteRenderer>();
+
+        //Quarta Feira 22:40
+        novoDia = "Qua 22:40";
+        dia.text = novoDia;
         
-        StartCoroutine(chat106());
+        StartCoroutine(Chat1());
     }
 
     void Update()
     {
-
-        if (animationEnabled)
-        {
-            //Inicio da transicao
-            Debug.Log("ficando preto?");
-            fadeImageObject.SetActive(true);
-            elapsedTime += Time.deltaTime;
-
-            float actualAlpha = elapsedTime / blinkDuration;
-            fadeImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(minAlpha, maxAlpha, actualAlpha);
-
-            if (elapsedTime > blinkDuration)
-            {
-                //Preto
-                if (elapsedTextTime < textDuration)
-                {
-                    Debug.Log("Inicio");
-                    elapsedTextTime += Time.deltaTime;
-                    dia.text = novoDia;    
-                    
-                }
-
-                else if (reverse == false)
-                {
-                    //voltando do preto
-                    Debug.Log("Meio");
-                    float temp = maxAlpha;
-                    maxAlpha = minAlpha;
-                    minAlpha = temp;
-                    elapsedTime = 0f;
-                    elapsedTextTime = 0f;
-                    reverse = true;   
-                    telasDeNotificacao();    
-                }
-                else
-                {
-                    //acabou
-                    Debug.Log("Fim da transição");
-                    animationEnabled = false;
-                    reverse = false;
-                    elapsedTime = 0f;
-                    elapsedTextTime = 0f;
-                    maxAlpha = 1f;
-                    minAlpha = 0f;
-                    fadeImageObject.SetActive(false);
-                    if(posTransicao == "chat36"){
-                        botaoTransicao.gameObject.SetActive(true);
-                    } else if( posTransicao == "chat465"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if( posTransicao == "chat64"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if(posTransicao == "chat685"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    }else if( posTransicao == "chat715"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if( posTransicao == "chat74"){
-                        botaoTransicao.gameObject.SetActive(true);
-                    }else if(posTransicao == "chat87"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if(posTransicao == "chat106"){
-                        botaoTransicao.gameObject.SetActive(true);
-                    }
-                    
-                    ConfigureButtonTransition();
-                    ConfigureButtonTransition2();
-                }
-            }
-        }
+        UpdateTransition();
     }
 
     public IEnumerator Chat1()
@@ -2010,6 +1937,82 @@ public class GameManager : MonoBehaviour
         foreach(Transform child in contentConversation.transform)
         {
             Destroy(child.gameObject);
+        }
+    }
+
+    public void UpdateTransition() 
+    {
+        if (animationEnabled)
+        {
+            //Inicio da transicao
+            Debug.Log("ficando preto?");
+            fadeImageObject.SetActive(true);
+            elapsedTime += Time.deltaTime;
+
+            float actualAlpha = elapsedTime / blinkDuration;
+            fadeImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(minAlpha, maxAlpha, actualAlpha);
+
+            if (elapsedTime > blinkDuration)
+            {
+                //Preto
+                if (elapsedTextTime < textDuration)
+                {
+                    Debug.Log("Inicio");
+                    elapsedTextTime += Time.deltaTime;
+                    dia.text = novoDia;    
+                    
+                }
+
+                else if (reverse == false)
+                {
+                    //voltando do preto
+                    Debug.Log("Meio");
+                    float temp = maxAlpha;
+                    maxAlpha = minAlpha;
+                    minAlpha = temp;
+                    elapsedTime = 0f;
+                    elapsedTextTime = 0f;
+                    reverse = true;   
+                    telasDeNotificacao();    
+                }
+                else
+                {
+                    //acabou
+                    Debug.Log("Fim da transição");
+                    animationEnabled = false;
+                    reverse = false;
+                    elapsedTime = 0f;
+                    elapsedTextTime = 0f;
+                    maxAlpha = 1f;
+                    minAlpha = 0f;
+                    fadeImageObject.SetActive(false);
+                    if(posTransicao == "chat36"){
+                        botaoTransicao.gameObject.SetActive(true);
+                    } else if( posTransicao == "chat465"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if( posTransicao == "chat64"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if(posTransicao == "chat685"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    }else if( posTransicao == "chat715"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if( posTransicao == "chat74"){
+                        botaoTransicao.gameObject.SetActive(true);
+                    }else if(posTransicao == "chat87"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if(posTransicao == "chat106"){
+                        botaoTransicao.gameObject.SetActive(true);
+                    }
+                    
+                    ConfigureButtonTransition();
+                    ConfigureButtonTransition2();
+                }
+            }
         }
     }
 }
