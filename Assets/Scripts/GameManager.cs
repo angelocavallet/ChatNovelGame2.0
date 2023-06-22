@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -9,11 +9,11 @@ public class GameManager : MonoBehaviour
 {
 
     public GameObject contentConversation;
-    public GameObject notificationBar;
     public GameObject rightMessagePrefab;
     public GameObject leftMessagePrefab;
 	public GameObject noticiaPrefab;
-    public float messageDelay = 3.0f; // Tempo de atraso entre as mensagens
+    public float messagePreDelay = 3.0f; // Tempo de atraso entre as mensagens
+    public float messagePosDelay = 3.0f; // Tempo de atraso entre as mensagens
 
     public TMP_Text statusMaria;
     public Image cabecalho;
@@ -72,102 +72,36 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //Quarta Feira 22:40
         textoBotao1 = botao1.GetComponentInChildren<TMP_Text>();
         textoBotao2 = botao2.GetComponentInChildren<TMP_Text>();
         textoBotao3 = botao3.GetComponentInChildren<TMP_Text>();
 
-        novoDia = "Qua 22:40";
-        dia.text = novoDia;
-
         SpriteRenderer cabecalhoSpriteRenderer = cabecalho.GetComponent<SpriteRenderer>();
         SpriteRenderer botoesFundoSpriteRenderer = botoesFundo.GetComponent<SpriteRenderer>();
+
+        //Quarta Feira 22:40
+        novoDia = "Qua 22:40";
+        dia.text = novoDia;
         
-        StartCoroutine(chat106());
+        StartCoroutine(Chat1());
     }
 
     void Update()
     {
-
-        if (animationEnabled)
-        {
-            //Inicio da transicao
-            Debug.Log("ficando preto?");
-            fadeImageObject.SetActive(true);
-            elapsedTime += Time.deltaTime;
-
-            float actualAlpha = elapsedTime / blinkDuration;
-            fadeImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(minAlpha, maxAlpha, actualAlpha);
-
-            if (elapsedTime > blinkDuration)
-            {
-                //Preto
-                if (elapsedTextTime < textDuration)
-                {
-                    Debug.Log("Inicio");
-                    elapsedTextTime += Time.deltaTime;
-                    dia.text = novoDia;    
-                    
-                }
-
-                else if (reverse == false)
-                {
-                    //voltando do preto
-                    Debug.Log("Meio");
-                    float temp = maxAlpha;
-                    maxAlpha = minAlpha;
-                    minAlpha = temp;
-                    elapsedTime = 0f;
-                    elapsedTextTime = 0f;
-                    reverse = true;   
-                    telasDeNotificacao();    
-                }
-                else
-                {
-                    //acabou
-                    Debug.Log("Fim da transição");
-                    animationEnabled = false;
-                    reverse = false;
-                    elapsedTime = 0f;
-                    elapsedTextTime = 0f;
-                    maxAlpha = 1f;
-                    minAlpha = 0f;
-                    fadeImageObject.SetActive(false);
-                    if(posTransicao == "chat36"){
-                        botaoTransicao.gameObject.SetActive(true);
-                    } else if( posTransicao == "chat465"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if( posTransicao == "chat64"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if(posTransicao == "chat685"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    }else if( posTransicao == "chat715"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if( posTransicao == "chat74"){
-                        botaoTransicao.gameObject.SetActive(true);
-                    }else if(posTransicao == "chat87"){
-                        botaoTransicao2.gameObject.SetActive(true);
-                        textoBotaoTransicao2.gameObject.SetActive(true);
-                    } else if(posTransicao == "chat106"){
-                        botaoTransicao.gameObject.SetActive(true);
-                    }
-                    
-                    ConfigureButtonTransition();
-                    ConfigureButtonTransition2();
-                }
-            }
-        }
+        UpdateTransition();
     }
 
     public IEnumerator Chat1()
     {
         Debug.Log("comecou");
         dia.text = "Qua 22:40";
-        yield return createNewMessageFromYou("oiee, tudo bem?🙏");
+
+
+        // Aqui embaixo tem o exemplo pra usar o delay antes da mensagem e depois da mensagem enviada
+        // o posdelay ta configurado pra ser executado antes de deletar
+
+        //   ------------------>>>>>>   EXEMPLO DE USO DOS DELAYS   deletar?  predelay   posdelay
+        yield return createNewMessageFromYou("oiee, tudo bem?🙏",   false,    3f,       5f);
         yield return createNewMessageFromYou("vi a foto que você postou");
         yield return createNewMessageFromYou("voltou pra cidade?");
         yield return createNewMessageFromMe("oii, tudo bem e você?");
@@ -647,10 +581,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("Chat36");
         ButtonPanel.SetActive(false);
 
-        messageDelay = 0.000001f;
+        messagePreDelay = 0.000001f;
         yield return createNewMessageFromYou("Oiee");
         yield return createNewMessageFromYou("As 3 então?");
-        messageDelay = 2.0f;
+        messagePreDelay = 2.0f;
         yield return createNewMessageFromMe("Eaii");
         yield return createNewMessageFromMe("Sim ja to com roupa de ir");
         yield return createNewMessageFromYou("Lembra onde é ne?");
@@ -747,7 +681,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Chat45");
         ButtonPanel.SetActive(false);
         
-        messageDelay = 2.0f;
+        messagePreDelay = 2.0f;
         yield return createNewMessageFromMe("Aé vdd, lembrei agora");
         yield return createNewMessageFromYou("Beleza, se vemos lá");
         yield return createNewMessageFromMe("Beleee");
@@ -1236,7 +1170,7 @@ public class GameManager : MonoBehaviour
         cabecalho.GetComponent<Image>().color = new Color32(140,115,115,255);
         botoesFundo.GetComponent<Image>().color = new Color32(140,115,115,255);
 
-        messageDelay= 0.000001f;
+        messagePreDelay= 0.000001f;
         yield return createNewMessageFromYou("Oi");
         yield return createNewMessageFromYou("Desculpa não consegui responder");
         yield return createNewMessageFromYou("Ontem e hoje foi bem corrido");
@@ -1253,7 +1187,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha75");
         ButtonPanel.SetActive(false);
 
-        messageDelay = 2.0f;
+        messagePreDelay = 2.0f;
         yield return createNewMessageFromMe("Tranquilo");
         yield return createNewMessageFromYou("Mas e vc ta td bem?");
 
@@ -1317,7 +1251,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha79");
         ButtonPanel.SetActive(false);
 
-        messageDelay = 2.0f;
+        messagePreDelay = 2.0f;
         yield return createNewMessageFromMe("Aconteceu alguma coisa?");
         yield return createNewMessageFromYou("Nada não");
         yield return createNewMessageFromYou("Só tava ocupada");
@@ -1335,7 +1269,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Cha80");
         ButtonPanel.SetActive(false);
 
-        messageDelay = 2.0f;
+        messagePreDelay = 2.0f;
         yield return createNewMessageFromMe("Ah, é que eu fiquei meio preocupado");
         yield return createNewMessageFromYou("Não tem pq se preocupar comigo");
 
@@ -1806,9 +1740,9 @@ public class GameManager : MonoBehaviour
         cabecalho.GetComponent<Image>().color = new Color32(0,0,0,255);
         botoesFundo.GetComponent<Image>().color = new Color32(0,0,0,255);
 
-        messageDelay = 0.000001f;
+        messagePreDelay = 0.000001f;
         yield return createNewMessageFromYou("Filho");
-        messageDelay = 2.0f;
+        messagePreDelay = 2.0f;
         yield return createNewMessageFromMe("Oi mãe");
         yield return createNewMessageFromYou("Preciso te mostrar essa notícia");
         yield return createNewNoticiaFromYou();
@@ -1845,29 +1779,43 @@ public class GameManager : MonoBehaviour
     
 
     //Cria as mensagens
-    public IEnumerator createNewMessageFromMe(string mensagem, bool vaiSerDeletada=false)
+    public IEnumerator createNewMessageFromMe(string mensagem, bool vaiSerDeletada=false, float preDelay=0f, float posDelay=0f)
     {
-        yield return waitSecondsAndCreateDialogChat(rightMessagePrefab, mensagem, vaiSerDeletada);
+        yield return waitSecondsAndCreateDialogChat(rightMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
     }
 
-    public IEnumerator createNewMessageFromYou(string mensagem, bool vaiSerDeletada=false)
+    public IEnumerator createNewMessageFromYou(string mensagem, bool vaiSerDeletada=false, float preDelay=0f, float posDelay=0f)
     {
-        yield return waitSecondsAndCreateDialogChat(leftMessagePrefab, mensagem, vaiSerDeletada);
+        yield return waitSecondsAndCreateDialogChat(leftMessagePrefab, mensagem, vaiSerDeletada, preDelay, posDelay);
 
     }
 
-	public IEnumerator createNewNoticiaFromYou()
+	public IEnumerator createNewNoticiaFromYou(float preDelay=0f, float posDelay=0f)
     {
-        yield return new WaitForSeconds(messageDelay);
+        if (preDelay == 0f) {
+            preDelay = messagePreDelay;
+        }
+
+        yield return new WaitForSeconds(preDelay);
 
         GameObject newMessage = Instantiate(noticiaPrefab, contentConversation.transform);
-
         newMessage.transform.localScale = new Vector3(1f, 1f, 1f);
+        
+        if (posDelay == 0f) {
+            posDelay = messagePosDelay;
+        }
+        
+        yield return new WaitForSeconds(posDelay);
     }
 
-    public IEnumerator waitSecondsAndCreateDialogChat(GameObject prefab, string mensagem, bool vaiSerDeletada=false)
+    public IEnumerator waitSecondsAndCreateDialogChat(GameObject prefab, string mensagem, bool vaiSerDeletada=false, float preDelay=0f, float posDelay=0f)
     {
-        yield return new WaitForSeconds(messageDelay);
+        //se nao passar o predelay ele pega da variavel da classe
+        if (preDelay == 0f) {
+            preDelay = messagePreDelay;
+        }
+
+        yield return new WaitForSeconds(preDelay);
 
         GameObject newMessage = Instantiate(prefab, contentConversation.transform);
 
@@ -1876,9 +1824,17 @@ public class GameManager : MonoBehaviour
         Debug.Log(textMessage);
         TMP_Text textMeshPro = textMessage.GetComponent<TMP_Text>();
         textMeshPro.text = mensagem;
+        
+        //se nao passar o predelay ele pega da variavel da classe
+        if (posDelay == 0f) {
+            posDelay = messagePosDelay;
+        }
+        
+        //esse intervalo vai ser executado antes de deletar a mensagem, caso isso for configurado
+        yield return new WaitForSeconds(posDelay);
 
         if (vaiSerDeletada) {
-            yield return new WaitForSeconds(messageDelay);
+            yield return new WaitForSeconds(messagePreDelay);
             textMeshPro.text = "🚫 Esta mensagem foi apagada";
         }
 
@@ -2010,6 +1966,82 @@ public class GameManager : MonoBehaviour
         foreach(Transform child in contentConversation.transform)
         {
             Destroy(child.gameObject);
+        }
+    }
+
+    public void UpdateTransition() 
+    {
+        if (animationEnabled)
+        {
+            //Inicio da transicao
+            Debug.Log("ficando preto?");
+            fadeImageObject.SetActive(true);
+            elapsedTime += Time.deltaTime;
+
+            float actualAlpha = elapsedTime / blinkDuration;
+            fadeImage.GetComponent<CanvasGroup>().alpha = Mathf.Lerp(minAlpha, maxAlpha, actualAlpha);
+
+            if (elapsedTime > blinkDuration)
+            {
+                //Preto
+                if (elapsedTextTime < textDuration)
+                {
+                    Debug.Log("Inicio");
+                    elapsedTextTime += Time.deltaTime;
+                    dia.text = novoDia;    
+                    
+                }
+
+                else if (reverse == false)
+                {
+                    //voltando do preto
+                    Debug.Log("Meio");
+                    float temp = maxAlpha;
+                    maxAlpha = minAlpha;
+                    minAlpha = temp;
+                    elapsedTime = 0f;
+                    elapsedTextTime = 0f;
+                    reverse = true;   
+                    telasDeNotificacao();    
+                }
+                else
+                {
+                    //acabou
+                    Debug.Log("Fim da transição");
+                    animationEnabled = false;
+                    reverse = false;
+                    elapsedTime = 0f;
+                    elapsedTextTime = 0f;
+                    maxAlpha = 1f;
+                    minAlpha = 0f;
+                    fadeImageObject.SetActive(false);
+                    if(posTransicao == "chat36"){
+                        botaoTransicao.gameObject.SetActive(true);
+                    } else if( posTransicao == "chat465"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if( posTransicao == "chat64"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if(posTransicao == "chat685"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    }else if( posTransicao == "chat715"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if( posTransicao == "chat74"){
+                        botaoTransicao.gameObject.SetActive(true);
+                    }else if(posTransicao == "chat87"){
+                        botaoTransicao2.gameObject.SetActive(true);
+                        textoBotaoTransicao2.gameObject.SetActive(true);
+                    } else if(posTransicao == "chat106"){
+                        botaoTransicao.gameObject.SetActive(true);
+                    }
+                    
+                    ConfigureButtonTransition();
+                    ConfigureButtonTransition2();
+                }
+            }
         }
     }
 }
